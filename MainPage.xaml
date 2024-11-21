@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="D424.MainPage"
+             BackgroundColor="LightGray">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="15">
+
+            <!-- Search Functionality -->
+            <SearchBar x:Name="CourseSearchBar"
+                       Placeholder="Search for a course..."
+                       TextChanged="OnSearchTextChanged"
+                       BackgroundColor="White"
+                       TextColor="Black"
+                       SearchButtonPressed="OnSearchButtonPressed"
+                       Unfocused="OnSearchBarUnfocused" />
+
+            <!-- Search Results -->
+            <CollectionView x:Name="SearchResults"
+                            SelectionMode="Single"
+                            SelectionChanged="OnCourseSelected"
+                            IsVisible="False">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="{Binding CourseName}" FontAttributes="Bold" FontSize="16" />
+                            <Label Text="{Binding Start, StringFormat='Start: {0:MM/dd/yyyy}'}" FontSize="12" />
+                            <Label Text="{Binding End, StringFormat='End: {0:MM/dd/yyyy}'}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Term Stack -->
+            <ScrollView Orientation="Horizontal" HeightRequest="80">
+                <HorizontalStackLayout x:Name="termStack" Spacing="20" Padding="10,15" BackgroundColor="AliceBlue">
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <!-- Term Title Entry -->
+            <HorizontalStackLayout Spacing="40" HorizontalOptions="Center" Padding="0,10">
+                <Entry x:Name="termTitle" Text="Enter Term Title" HorizontalTextAlignment="Center" FontAttributes="Italic" FontSize="30" 
+                       TextColor="Navy" Placeholder="Enter Term Title" TextChanged="TermTitleChange"/>
+            </HorizontalStackLayout>
+
+            <!-- Term Date Pickers -->
+            <Border Stroke="SlateBlue" StrokeThickness="3" Padding="10" BackgroundColor="Lavender">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Padding="10">
+                    <VerticalStackLayout>
+                        <Label Text="Start Date:" HorizontalTextAlignment="Center" FontSize="20" TextColor="DarkSlateBlue"/>
+                        <DatePicker x:Name="termStart" BackgroundColor="Honeydew" DateSelected="TermStart_DateSelect"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="End Date:" HorizontalTextAlignment="Center" FontSize="20" TextColor="DarkSlateBlue"/>
+                        <DatePicker x:Name="termEnd" BackgroundColor="Honeydew" DateSelected="TermEnd_DateSelect"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- Course Stack -->
+            <VerticalStackLayout x:Name="courseStack" Spacing="35" Padding="25,10" BackgroundColor="WhiteSmoke">
+            </VerticalStackLayout>
+
+            <!-- Generate Reports Button -->
+            <Button
+                Text="Generate Reports"
+                Clicked="OnGenerateReportClicked"
+                BackgroundColor="SteelBlue"
+                TextColor="White"
+                CornerRadius="10"
+                Margin="0,20,0,20"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+
+
+
+
